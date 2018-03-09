@@ -12,16 +12,11 @@ import model.User;
 
 public class UserManager {
 	
-	String idUser;
-	static boolean connected;
-	
-	public UserManager(String idUser, boolean isConnected) {
+	public UserManager() {
 		super();
-		this.idUser = idUser;
-		this.connected = isConnected;
 	}
 	
-	public void connection(String login, String pwd, HttpSession session) {
+	public boolean connection(String login, String pwd, HttpSession session) {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
@@ -34,6 +29,11 @@ public class UserManager {
 		if ( !userResult.equals(null) )
 		{
 			session.setAttribute("UserSession", userResult.getMail());
+			return true;
+		}
+		else 
+		{
+			return false;
 		}
 	}
 }
