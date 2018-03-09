@@ -7,56 +7,42 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import model.User;
-import service.UserManager;
 
 /**
- * Servlet implementation class Register
+ * Servlet implementation class MySpace
  */
-@WebServlet("/register")
-public class Register extends HttpServlet {
-
+@WebServlet("/mySpace")
+public class MySpace extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public static String VIEW_PAGES_URL="/WEB-INF/register.jsp";
-    public static String ACCUEIL_PAGE_URL="/index.jsp";
-
-    public static final String FIELD_EMAIL = "email";
+	public static String VIEW_PAGES_URL="/WEB-INF/mySpace.jsp";
+       
+	public static final String FIELD_EMAIL = "email";
     public static final String FIELD_NOM = "nom";
     public static final String FIELD_PRENOM = "prenom";
     public static final String FIELD_ADDRESS = "address";
     public static final String FIELD_PWD = "pwd1";
     public static final String FIELD_CONFIRM_PWD = "pwd2";
-
-	public static final String ATT_USERS = "users";
-
-	/**
+    /**
      * @see HttpServlet#HttpServlet()
      */
-    public Register() {
+    public MySpace() {
         super();
         // TODO Auto-generated constructor stub
-    }
-
-    @Override
-    public void init() throws ServletException {
-    	super.init();
-       
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("errorStatus", true);
+		// TODO check if connected
+		request.setAttribute("errorStatus", false);
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward( request, response );
 	}
 
@@ -64,9 +50,10 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Get form fields
+		// TODO Auto-generated method stub
+		// Get form fields
         String email = request.getParameter(FIELD_EMAIL);
-        String password = request.getParameter(FIELD_PWD);
+        String pwd = request.getParameter(FIELD_PWD);
         String pwdConfirmation = request.getParameter(FIELD_CONFIRM_PWD);
         String nom = request.getParameter(FIELD_NOM);
         String prenom = request.getParameter(FIELD_PRENOM);
@@ -86,9 +73,9 @@ public class Register extends HttpServlet {
             erreurs.put(FIELD_EMAIL, msgVal);
         }
 
-        msgVal=validatePwd(password, pwdConfirmation);
+        msgVal=validatePwd(pwd, pwdConfirmation);
         if(msgVal==null){
-        	form.put(FIELD_PWD, password);
+        	form.put(FIELD_PWD, pwd);
         }
         else{
             erreurs.put(FIELD_CONFIRM_PWD, msgVal);
@@ -98,24 +85,15 @@ public class Register extends HttpServlet {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
 		
-		User newUser = new User();
-		newUser.setFirstname(prenom);
-		newUser.setLastname(nom);
-		newUser.setAddress(address);
-		newUser.setMail(email);
-		newUser.setPassword(password);
-
-		entityManager.persist(newUser);
+		//GetUser
+		
+		//update user
 
 		entityManager.getTransaction().commit();
 	    entityManager.close();
 	    entityManagerFactory.close();
 		
-	    HttpSession session = request.getSession();
-	    UserManager userManager = new UserManager();
-	    userManager.connection(email, password, session);
-	    
-        this.getServletContext().getRequestDispatcher(ACCUEIL_PAGE_URL).include( request, response );
+        this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include( request, response );
 	}
 
 	private String validateEmail( String email ) {

@@ -11,7 +11,7 @@
 	</div>
 	
 	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-		<input name="pwd1" class="mdl-textfield__input" type="password" maxlength="20" required id="in3">
+		<input name="password" class="mdl-textfield__input" type="password" maxlength="20" required id="in3">
 		<label class="mdl-textfield__label" for="in3">Mot de passe</label>
 	</div>
 	<div>
