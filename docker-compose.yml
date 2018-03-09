@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+    db:
+      image: mysql
+      environment:
+                - MYSQL_DATABASE=blablaflop
+                - MYSQL_USER=blablaflop
+                - MYSQL_PASSWORD=plop
+                - MYSQL_ROOT_PASSWORD=plop
+      volumes:
+            - ./db:/var/lib/mysql
+      ports:
+            - "3306:3306"
+    phpmyadmin:
+     image: phpmyadmin/phpmyadmin
+     environment:
+            PMA_ARBITRARY: 1
+            MYSQL_USER: blablaflop
+            MYSQL_PASSWORD: plop
+            MYSQL_ROOT_PASSWORD: plop
+     ports:
+            - "8000:80"
+     links:
+            # for mysql container
+            - "db:db"
+volumes:
+    db:
+        driver: "local"
+
+
+

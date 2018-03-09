@@ -1,0 +1,33 @@
+@CHARSET "ISO-8859-1";
+body {
+	display: flex;
+	flex-direction: column;
+}
+.mdl-layout__header .mdl-layout__drawer-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.col {
+	display: flex;
+	flex-direction: column;
+}
+.row {
+	display: flex;
+	flex-direction: row;
+}
+.expand {
+	width: 100%;
+	flex: 1;
+}
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.erreur {
+	color: #D8334A;
+}
+.info {
+	color: #8CC152;
+}
