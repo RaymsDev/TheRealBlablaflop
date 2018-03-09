@@ -5,7 +5,7 @@
     <head>
     	<%@ include file="/includes/mdl.jsp" %>
         <title>Inscription | BlablaFlop</title>
-        <link type="text/css" rel="stylesheet" href="styles.css" />
+        <link type="text/css" rel="stylesheet" href="style/main.css" />
     </head>
     <body>
     	<c:import url="/WEB-INF/menu/menu.jsp" />

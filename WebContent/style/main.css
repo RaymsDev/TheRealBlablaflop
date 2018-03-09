@@ -44,3 +44,13 @@ body {
 #positionning .mdl-progress {
 	width: 180px;
 }
+#searchbox {
+	margin: 15px;
+	width: 100%;
+	max-width: 400px;
+}
+.section {
+	margin: 40px auto;
+	width: 90%;
+	min-height: 500px;
+}

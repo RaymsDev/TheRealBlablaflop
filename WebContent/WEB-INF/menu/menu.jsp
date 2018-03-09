@@ -10,7 +10,7 @@
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
         <a class="mdl-navigation__link" href="<c:url value="/"/>">Accueil</a>
-        <a class="mdl-navigation__link" href="<c:url value="/login"/>">Mon espace</a>
+        <a class="mdl-navigation__link" href="<c:url value="/login"/>">Se connecter</a>
         <a class="mdl-navigation__link" href="<c:url value="/register"/>">S'enregistrer</a>
       </nav>
     </div>
@@ -19,7 +19,7 @@
     <span class="mdl-layout-title">Blablaflop</span>
     <nav class="mdl-navigation">
    	  <a class="mdl-navigation__link" href="<c:url value="/"/>">Accueil</a>
-      <a class="mdl-navigation__link" href="<c:url value="/login"/>">Mon espace</a>
+      <a class="mdl-navigation__link" href="<c:url value="/login"/>">Se connecter</a>
       <a class="mdl-navigation__link" href="<c:url value="/register"/>">S'enregistrer</a>
     </nav>
   </div>
