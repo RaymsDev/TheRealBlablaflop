@@ -54,9 +54,6 @@ public class MySpace extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// Get form fields
-        String email = request.getParameter(FIELD_EMAIL);
-        String password = request.getParameter(FIELD_PWD);
-        String passwordConfirmation = request.getParameter(FIELD_CONFIRM_PWD);
         String nom = request.getParameter(FIELD_NOM);
         String prenom = request.getParameter(FIELD_PRENOM);
         String address = request.getParameter(FIELD_ADDRESS);
@@ -66,22 +63,6 @@ public class MySpace extends HttpServlet {
         Map<String, String> form = new HashMap<String, String>();
         String actionMessage=null;
         String msgVal=null;
-
-        msgVal=validateEmail(email);
-        if(msgVal==null){
-        	form.put(FIELD_EMAIL, email);
-        }
-        else{
-            erreurs.put(FIELD_EMAIL, msgVal);
-        }
-
-        msgVal=validatePwd(password, passwordConfirmation);
-        if(msgVal==null){
-        	form.put(FIELD_PWD, password);
-        }
-        else{
-            erreurs.put(FIELD_CONFIRM_PWD, msgVal);
-        }
         
 		UserManager userManager = new UserManager();
 		HttpSession session = request.getSession();
@@ -89,13 +70,11 @@ public class MySpace extends HttpServlet {
 		updatedUser.setFirstname(prenom);
 		updatedUser.setLastname(nom);
 		updatedUser.setAddress(address);
-		updatedUser.setMail(email);
-		updatedUser.setPassword(password);
 		
-		userManager.updateUser(session, updatedUser);
+		Boolean result = userManager.updateUser(session, updatedUser);
 		
         // Build view
-        if(msgVal == null) {
+        if(result) {
         	response.sendRedirect( request.getContextPath() +  "/");
         }else {
         	// Prepare model to view

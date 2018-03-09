@@ -1,9 +1,5 @@
 		<form method="post" action="mySpace" class="center col" style="width: 100%; margin: auto;">
 			<h3>Mon Compte</h3>
-			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				<input name="email" class="mdl-textfield__input" type="text" required id="in2" value="${form['email']}">
-				<label class="mdl-textfield__label" for="in2">Adresse mail</label>
-			</div>
 			<div>
 				<span class="erreur">${erreurs['email']}</span>
 			</div>
@@ -19,21 +15,7 @@
 				<input name="address" class="mdl-textfield__input" type="text" required id="autocomplete" value="${form['address']}">
 				<label class="mdl-textfield__label" for="autocomplete">Adresse</label>
 			</div>
-			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				<input name="pwd1" class="mdl-textfield__input" type="password" required id="in3" value="${form['pwd1']}">
-				<label class="mdl-textfield__label" for="in3">Mot de passe</label>
-			</div>
-			<div>
-				<span class="erreur">${erreurs['pwd1']}</span>
-			</div>
-			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				<input name="pwd2" class="mdl-textfield__input" type="password" required id="in4" value="${form['pwd2']}">
-				<label class="mdl-textfield__label" for="in1">Confirmation mot de passe</label>
-			</div>
-			<div>
-				<span class="erreur">${erreurs['pwd2']}</span>
-			</div>
-			<div>
+
 				<input value="Modifier" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
 			</div>
 			<p class="info">${actionMessage}</p>

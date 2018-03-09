@@ -46,6 +46,13 @@ public class UserManager {
 			
 			if(oldUser != null) {
 				User userToUpdate = (User)entityManager.find(oldUser.getClass(), 1);
+
+				entityManager.getTransaction().begin();
+				userToUpdate.setFirstname(user.getFirstname());
+				userToUpdate.setLastname(user.getLastname());
+				userToUpdate.setAddress(user.getAddress());
+				entityManager.getTransaction().commit();
+
 				result = true;
 			}
 			
