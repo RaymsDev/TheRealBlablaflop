@@ -12,7 +12,6 @@
         <a class="mdl-navigation__link" href="<c:url value="/"/>">Accueil</a>
         <a class="mdl-navigation__link" href="<c:url value="/login"/>">Mon espace</a>
         <a class="mdl-navigation__link" href="<c:url value="/register"/>">S'enregistrer</a>
-        <a class="mdl-navigation__link" href="<c:url value="/users"/>">Utilisateurs</a>
       </nav>
     </div>
   </header>
@@ -22,7 +21,6 @@
    	  <a class="mdl-navigation__link" href="<c:url value="/"/>">Accueil</a>
       <a class="mdl-navigation__link" href="<c:url value="/login"/>">Mon espace</a>
       <a class="mdl-navigation__link" href="<c:url value="/register"/>">S'enregistrer</a>
-      <a class="mdl-navigation__link" href="<c:url value="/users"/>">Utilisateurs</a>
     </nav>
   </div>
 </div>
