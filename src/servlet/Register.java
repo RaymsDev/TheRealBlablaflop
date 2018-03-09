@@ -93,7 +93,7 @@ public class Register extends HttpServlet {
 
         // TODO: Creation user
         
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("blablaflop");
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
 		
