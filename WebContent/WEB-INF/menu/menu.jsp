@@ -10,7 +10,12 @@
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
         <a class="mdl-navigation__link" href="<c:url value="/"/>">Accueil</a>
-        <a class="mdl-navigation__link" href="<c:url value="/login"/>">Se connecter</a>
+        <c:if test="${ empty UserSession }">
+	       <a class="mdl-navigation__link" href="<c:url value="/login"/>">Se connecter</a>
+	    </c:if>
+	    <c:if test="${ not empty UserSession }">
+	       <a class="mdl-navigation__link" href="<c:url value="/mySpace"/>">${UserSession.getMail()}</a>
+	    </c:if>
         <a class="mdl-navigation__link" href="<c:url value="/register"/>">S'enregistrer</a>
       </nav>
     </div>
@@ -19,7 +24,12 @@
     <span class="mdl-layout-title">Blablaflop</span>
     <nav class="mdl-navigation">
    	  <a class="mdl-navigation__link" href="<c:url value="/"/>">Accueil</a>
-      <a class="mdl-navigation__link" href="<c:url value="/login"/>">Se connecter</a>
+      <c:if test="${ empty UserSession }">
+		<a class="mdl-navigation__link" href="<c:url value="/login"/>">Se connecter</a>
+	  </c:if>
+	  <c:if test="${ not empty UserSession }">
+        <a class="mdl-navigation__link" href="<c:url value="/mySpace"/>">${UserSession.getMail()}</a>
+      </c:if>
       <a class="mdl-navigation__link" href="<c:url value="/register"/>">S'enregistrer</a>
     </nav>
   </div>
