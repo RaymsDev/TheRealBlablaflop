@@ -6,7 +6,6 @@
 	<%@ include file="/includes/mdl.jsp" %>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Connexion | BlablaFlop</title>
-    <link type="text/css" rel="stylesheet" href="styles.css" />
 </head>
 <body>
    	<c:import url="/WEB-INF/menu/menu.jsp" />

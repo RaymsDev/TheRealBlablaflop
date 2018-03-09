@@ -5,7 +5,6 @@
     <head>
     	<%@ include file="/includes/mdl.jsp" %>
         <title>BlablaFlop</title>
-        <link type="text/css" rel="stylesheet" href="styles.css" />
     </head>
     <body>
         <c:import url="menu/menu.jsp" />

@@ -6,12 +6,12 @@
 <head>
 	<%@ include file="/includes/mdl.jsp" %>
 	<meta http-equiv="Content-Type" content="text/html; UTF-8">
-    <link type="text/css" rel="stylesheet" href="style/main.css" />
 	<title>Accueil | BlablaFlop</title>
 </head>
 <body>
    	<c:import url="/WEB-INF/menu/menu.jsp" />
 	<div>
+		<div style="padding: 50px"> user: ${UserSession}</div>
 		<div id="map"></div>
 		<div id="positionning">
 			<span>Calcul de la position en cours</span>

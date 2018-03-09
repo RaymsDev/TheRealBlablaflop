@@ -8,7 +8,6 @@
 	<%@ include file="/includes/mdl.jsp" %>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Mon Compte | BlablaFlop</title>
-    <link type="text/css" rel="stylesheet" href="styles.css" />
 </head>
 </head>
 <body>
