@@ -17,10 +17,25 @@ public class UserManager {
 	}
 	
 	private final static String USER_KEY = "UserSession";
+
+	public boolean exist(String mail) {
+		EntityManager entityManager = baseAccess();
+		
+		Query q = entityManager.createQuery("COUNT u FROM User u WHERE u.mail = :userMail");
+		q.setParameter("userMail", mail);
+		
+		int nbUserWithMail = q.getFirstResult();
+		
+		if (nbUserWithMail != 0) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
 	
 	public boolean connection(String login, String pwd, HttpSession session) {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		EntityManager entityManager = baseAccess();
 		
 		Query q = entityManager.createQuery("SELECT u FROM User u WHERE u.mail = :userMail AND u.password = :userPwd");
 		q.setParameter("userMail", login);
@@ -39,7 +54,7 @@ public class UserManager {
 	public boolean updateUser(HttpSession session, User user) {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		Boolean result = false;
+		boolean result = false;
 		try {
 			User oldUser = null;
 			oldUser = (User)session.getAttribute(USER_KEY);
@@ -58,7 +73,7 @@ public class UserManager {
 	
 	public User connectedUser( HttpSession session) {
 		try {
-			User connectedUser = (User) session.getAttribute("UserSession");
+			User connectedUser = (User) session.getAttribute(USER_KEY);
 			return connectedUser;
 		} catch (Exception e) {
 			return null;
@@ -67,5 +82,11 @@ public class UserManager {
 	
 	public void logOut(HttpSession session ) {
 		session.invalidate();
+	}
+	
+	private EntityManager baseAccess() {
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		return entityManager;
 	}
 }
