@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 08, 2018 at 02:45 PM
+-- Generation Time: Mar 09, 2018 at 10:45 AM
 -- Server version: 5.7.21
 -- PHP Version: 7.2.2
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `blablaflop`
 --
+CREATE DATABASE IF NOT EXISTS `blablaflop` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `blablaflop`;
 
 -- --------------------------------------------------------
 
@@ -28,6 +30,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `firstname` varchar(50) NOT NULL,
@@ -36,6 +39,13 @@ CREATE TABLE `user` (
   `mail` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `firstname`, `lastname`, `address`, `mail`, `password`) VALUES
+(1, 'plop', 'plop', 'plop', 'plop', 'plop');
 
 --
 -- Indexes for dumped tables
@@ -55,7 +65,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
