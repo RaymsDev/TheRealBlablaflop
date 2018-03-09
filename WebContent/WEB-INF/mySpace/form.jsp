@@ -1,4 +1,4 @@
-		<form method="post" action="register" class="center col" style="width: 100%; margin: auto;">
+		<form method="post" action="mySpace" class="center col" style="width: 100%; margin: auto;">
 			<h3>Mon Compte</h3>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 				<input name="email" class="mdl-textfield__input" type="text" required id="in2" value="${form['email']}">
@@ -13,7 +13,7 @@
 			</div>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 				<input name="prenom" class="mdl-textfield__input" type="text" required id="in5" value="${form['prenom']}">
-				<label class="mdl-textfield__label" for="in5">Prénom</label>
+				<label class="mdl-textfield__label" for="in5">Prenom</label>
 			</div>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 				<input name="address" class="mdl-textfield__input" type="text" required id="autocomplete" value="${form['address']}">

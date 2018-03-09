@@ -96,18 +96,15 @@ public class Login extends HttpServlet {
         // Build view
         String pageRedirection = VIEW_PAGES_URL;
         if(statusOk) {
-        	pageRedirection = MY_SPACE_PAGE_URL;
+        	response.sendRedirect( request.getContextPath() +  "/mySpace");
         }else {
         	// Prepare model to view
             request.setAttribute("form", form);
             request.setAttribute("error", error);
             request.setAttribute("statusOK", statusOk);
             request.setAttribute("statusMessage", statusMessage);
+            this.getServletContext().getRequestDispatcher(pageRedirection).include( request, response);
         }
-        
-        
-        this.getServletContext().getRequestDispatcher(pageRedirection).include( request, response);
-		
 	}
 	
 	private String validateEmail( String email ) {

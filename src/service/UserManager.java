@@ -16,6 +16,8 @@ public class UserManager {
 		super();
 	}
 	
+	private final static String USER_KEY = "UserSession";
+	
 	public boolean connection(String login, String pwd, HttpSession session) {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -28,12 +30,32 @@ public class UserManager {
 		
 		if ( !userResult.equals(null) )
 		{
-			session.setAttribute("UserSession", userResult.getMail());
+			session.setAttribute(USER_KEY, userResult.getMail());
 			return true;
 		}
 		else 
 		{
 			return false;
 		}
+	}
+	
+	public boolean updateUser(HttpSession session, User user) {
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		Boolean result = false;
+		try {
+			User oldUser = null;
+			oldUser = (User)session.getAttribute(USER_KEY);
+			
+			if(oldUser != null) {
+				User userToUpdate = (User)entityManager.find(oldUser.getClass(), 1);
+				result = true;
+			}
+			
+		}catch(Exception ex) {
+			result = false;
+		}
+		
+		return result;
 	}
 }
