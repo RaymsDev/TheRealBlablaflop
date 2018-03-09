@@ -24,16 +24,20 @@ public class UserManager {
 		q.setParameter("userMail", login);
 		q.setParameter("userPwd", pwd);
 		
-		User userResult = (User) q.getSingleResult();
-		
-		if ( !userResult.equals(null) )
-		{
-			session.setAttribute("UserSession", userResult.getMail());
+		try {
+			User userResult = (User) q.getSingleResult();
+			session.setAttribute("UserSession", userResult);
 			return true;
-		}
-		else 
-		{
+		} catch ( Exception e) {
 			return false;
 		}
+	}
+	
+	public User connected() {
+		
+	}
+	
+	public void deconnection(HttpSession seesion ) {
+		
 	}
 }
