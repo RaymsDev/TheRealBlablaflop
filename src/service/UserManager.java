@@ -33,8 +33,14 @@ public class UserManager {
 		}
 	}
 	
-	public User connected() {
-		
+	public User connectedUser( HttpSession session) {
+		try {
+			User connectedUser = (User) session.getAttribute("UserSession");
+			return connectedUser;
+		} catch (Exception e) {
+			
+			return null;
+		}
 	}
 	
 	public void deconnection(HttpSession seesion ) {
