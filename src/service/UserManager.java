@@ -42,7 +42,7 @@ public class UserManager {
 		}
 	}
 	
-	public void deconnection(HttpSession session ) {
+	public void logOut(HttpSession session ) {
 		session.invalidate();
 	}
 }
