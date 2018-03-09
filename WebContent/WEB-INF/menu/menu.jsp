@@ -26,5 +26,5 @@
     </nav>
   </div>
 </div>
-<div style="width: 1px; height: 70px;">
+<div style="width: 1px; height: 50px;">
 </div>

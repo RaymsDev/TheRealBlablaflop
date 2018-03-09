@@ -31,3 +31,16 @@ body {
 .info {
 	color: #8CC152;
 }
+#map {
+	min-height: 500px;
+}
+#positionning {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 8px;
+}
+#positionning .mdl-progress {
+	width: 180px;
+}
