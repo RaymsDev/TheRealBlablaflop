@@ -1,4 +1,4 @@
-		<form method="post" action="register" class="center col" style="width: 500px; margin: auto;">
+		<form method="post" action="register" class="center col" style="width: 100%; margin: auto;">
 			<h3>Inscription</h3>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 				<input name="email" class="mdl-textfield__input" type="text" required id="in2" value="${form['email']}">
@@ -16,7 +16,7 @@
 				<label class="mdl-textfield__label" for="in5">Prénom</label>
 			</div>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				<input name="address" class="mdl-textfield__input" type="text" required id="autocomplete" onFocus="geolocate()" value="${form['address']}">
+				<input name="address" class="mdl-textfield__input" type="text" required id="autocomplete" value="${form['address']}">
 				<label class="mdl-textfield__label" for="autocomplete">Adresse</label>
 			</div>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -35,6 +35,9 @@
 			</div>
 			<div>
 				<input value="Enregistrement" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
+				<a class="mdl-button mdl-js-button" href="login">
+				  J'ai un compte
+				</a>
 			</div>
 			<p class="info">${actionMessage}</p>
 		</form>
