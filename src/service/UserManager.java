@@ -26,15 +26,12 @@ public class UserManager {
 		q.setParameter("userMail", login);
 		q.setParameter("userPwd", pwd);
 		
-		User userResult = (User) q.getSingleResult();
-		
-		if ( !userResult.equals(null) )
-		{
-			session.setAttribute(USER_KEY, userResult.getMail());
+		try {
+			User userResult = (User) q.getSingleResult();
+			session.setAttribute(USER_KEY, userResult);
+
 			return true;
-		}
-		else 
-		{
+		} catch ( Exception e) {
 			return false;
 		}
 	}
@@ -57,5 +54,18 @@ public class UserManager {
 		}
 		
 		return result;
+	}
+	
+	public User connectedUser( HttpSession session) {
+		try {
+			User connectedUser = (User) session.getAttribute("UserSession");
+			return connectedUser;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public void logOut(HttpSession session ) {
+		session.invalidate();
 	}
 }

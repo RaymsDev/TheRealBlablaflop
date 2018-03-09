@@ -96,7 +96,7 @@ public class Login extends HttpServlet {
         // Build view
         String pageRedirection = VIEW_PAGES_URL;
         if(statusOk) {
-        	response.sendRedirect( request.getContextPath() +  "/mySpace");
+        	response.sendRedirect( request.getContextPath() +  "/");
         }else {
         	// Prepare model to view
             request.setAttribute("form", form);
