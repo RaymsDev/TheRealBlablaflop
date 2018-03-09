@@ -115,7 +115,14 @@ public class Register extends HttpServlet {
 	    UserManager userManager = new UserManager();
 	    userManager.connection(email, password, session);
 	    
-        this.getServletContext().getRequestDispatcher(ACCUEIL_PAGE_URL).include( request, response );
+        // Build view
+        if(msgVal == null) {
+        	response.sendRedirect( request.getContextPath() +  ACCUEIL_PAGE_URL);
+        }else {
+        	// Prepare model to view
+            request.setAttribute("form", form);
+            this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include( request, response);
+        }
 	}
 
 	private String validateEmail( String email ) {

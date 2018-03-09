@@ -12,8 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.User;
+import service.UserManager;
 
 /**
  * Servlet implementation class MySpace
@@ -22,7 +24,7 @@ import model.User;
 public class MySpace extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL="/WEB-INF/mySpace.jsp";
-       
+    public static String ACCUEIL_PAGE_URL="/index.jsp";
 	public static final String FIELD_EMAIL = "email";
     public static final String FIELD_NOM = "nom";
     public static final String FIELD_PRENOM = "prenom";
@@ -53,8 +55,8 @@ public class MySpace extends HttpServlet {
 		// TODO Auto-generated method stub
 		// Get form fields
         String email = request.getParameter(FIELD_EMAIL);
-        String pwd = request.getParameter(FIELD_PWD);
-        String pwdConfirmation = request.getParameter(FIELD_CONFIRM_PWD);
+        String password = request.getParameter(FIELD_PWD);
+        String passwordConfirmation = request.getParameter(FIELD_CONFIRM_PWD);
         String nom = request.getParameter(FIELD_NOM);
         String prenom = request.getParameter(FIELD_PRENOM);
         String address = request.getParameter(FIELD_ADDRESS);
@@ -73,27 +75,33 @@ public class MySpace extends HttpServlet {
             erreurs.put(FIELD_EMAIL, msgVal);
         }
 
-        msgVal=validatePwd(pwd, pwdConfirmation);
+        msgVal=validatePwd(password, passwordConfirmation);
         if(msgVal==null){
-        	form.put(FIELD_PWD, pwd);
+        	form.put(FIELD_PWD, password);
         }
         else{
             erreurs.put(FIELD_CONFIRM_PWD, msgVal);
         }
         
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		entityManager.getTransaction().begin();
+		UserManager userManager = new UserManager();
+		HttpSession session = request.getSession();
+		User updatedUser = new User();
+		updatedUser.setFirstname(prenom);
+		updatedUser.setLastname(nom);
+		updatedUser.setAddress(address);
+		updatedUser.setMail(email);
+		updatedUser.setPassword(password);
 		
-		//GetUser
+		userManager.updateUser(session, updatedUser);
 		
-		//update user
-
-		entityManager.getTransaction().commit();
-	    entityManager.close();
-	    entityManagerFactory.close();
-		
-        this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include( request, response );
+        // Build view
+        if(msgVal == null) {
+        	response.sendRedirect( request.getContextPath() +  "/");
+        }else {
+        	// Prepare model to view
+            request.setAttribute("form", form);
+            this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include( request, response);
+        }
 	}
 
 	private String validateEmail( String email ) {
