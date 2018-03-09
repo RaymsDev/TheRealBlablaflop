@@ -11,7 +11,6 @@
 <body>
    	<c:import url="/WEB-INF/menu/menu.jsp" />
 	<div>
-		<div style="padding: 50px"> user: ${UserSession}</div>
 		<div id="map"></div>
 		<div id="positionning">
 			<span>Calcul de la position en cours</span>
