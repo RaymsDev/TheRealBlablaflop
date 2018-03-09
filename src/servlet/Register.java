@@ -25,6 +25,7 @@ public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public static String VIEW_PAGES_URL="/WEB-INF/register.jsp";
+    public static String ACCUEIL_PAGE_URL="/index.jsp";
 
     public static final String FIELD_EMAIL = "email";
     public static final String FIELD_NOM = "nom";
@@ -90,8 +91,6 @@ public class Register extends HttpServlet {
         else{
             erreurs.put(FIELD_CONFIRM_PWD, msgVal);
         }
-
-        // TODO: Creation user
         
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -110,7 +109,7 @@ public class Register extends HttpServlet {
 	    entityManager.close();
 	    entityManagerFactory.close();
 		
-        this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include( request, response );
+        this.getServletContext().getRequestDispatcher(ACCUEIL_PAGE_URL).include( request, response );
 	}
 
 	private String validateEmail( String email ) {
