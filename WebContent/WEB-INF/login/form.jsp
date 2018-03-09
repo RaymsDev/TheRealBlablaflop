@@ -1,6 +1,5 @@
 <form method="post" action="login" class="center col" style="width: 500px; margin: auto;">
 	<h3>Connexion</h3>
-	<p>Vous pouvez vous connecter via ce formulaire</p>
       
 	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 		<input name="email" class="mdl-textfield__input" type="text" required id="in2" maxlength="60" value="${form.email}">
