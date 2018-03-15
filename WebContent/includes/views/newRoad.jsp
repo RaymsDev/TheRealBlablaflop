@@ -1,5 +1,5 @@
 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-  <div class="mdl-tabs__tab-bar">
+  <div class="mdl-tabs__tab-bar" style="justify-content:  flex-start">
       <a href="#conducteur" class="mdl-tabs__tab is-active">
       	<i class="material-icons">directions_car</i> Conducteur
       </a>

@@ -84,11 +84,11 @@ public class Login extends HttpServlet {
         
         if(error.isEmpty() && userManager.connection(email, password, session)){
         	statusOk=true;
-        	statusMessage="Connecté";
+        	statusMessage="Connect&eacute;";
         }
         else{
         	statusOk=false;
-        	statusMessage="Connexion refusée";
+        	statusMessage="Connexion refus&eacute;e";
         }
 
         
@@ -125,7 +125,7 @@ public class Login extends HttpServlet {
 	}
 
 	private String validatePwd(String pwd) {
-		return (pwd==null || pwd.equals(""))?"Le mot de passe doit être renseigné":null;
+		return (pwd==null || pwd.equals(""))?"Le mot de passe doit &ecirc;tre renseign&eacute;":null;
 	}
 	
 	private boolean isUserExist(String login){
