@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -27,6 +28,23 @@ public class User implements Serializable {
 	private String mail;
 
 	private String password;
+
+	//bi-directional many-to-one association to Ride
+	@OneToMany(mappedBy="user")
+	private List<Ride> driver;
+
+	//bi-directional many-to-many association to Ride
+	@ManyToMany
+	@JoinTable(
+		name="passenger"
+		, joinColumns={
+			@JoinColumn(name="id_user")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="id_ride")
+			}
+		)
+	private List<Ride> rides;
 
 	public User() {
 	}
@@ -77,6 +95,36 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<Ride> getDriver() {
+		return this.driver;
+	}
+
+	public void setDriver(List<Ride> driver) {
+		this.driver = driver;
+	}
+
+	public Ride addDriver(Ride driver) {
+		getDriver().add(driver);
+		driver.setUser(this);
+
+		return driver;
+	}
+
+	public Ride removeDriver(Ride driver) {
+		getDriver().remove(driver);
+		driver.setUser(null);
+
+		return driver;
+	}
+
+	public List<Ride> getRides() {
+		return this.rides;
+	}
+
+	public void setRides(List<Ride> rides) {
+		this.rides = rides;
 	}
 
 }
