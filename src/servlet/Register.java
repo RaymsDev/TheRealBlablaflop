@@ -35,6 +35,8 @@ public class Register extends HttpServlet {
     public static final String FIELD_ADDRESS = "address";
     public static final String FIELD_PWD = "pwd1";
     public static final String FIELD_CONFIRM_PWD = "pwd2";
+    
+    public static final String MAIL_EARLY_EXIST = "User with this mail early exist";
 
 	public static final String ATT_USERS = "users";
 
@@ -94,26 +96,32 @@ public class Register extends HttpServlet {
             erreurs.put(FIELD_CONFIRM_PWD, msgVal);
         }
         
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		entityManager.getTransaction().begin();
-		
-		User newUser = new User();
-		newUser.setFirstname(prenom);
-		newUser.setLastname(nom);
-		newUser.setAddress(address);
-		newUser.setMail(email);
-		newUser.setPassword(password);
+        UserManager userManager = new UserManager();
+                
+        if( !userManager.exist(email) ) {
+        	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
+    		EntityManager entityManager = entityManagerFactory.createEntityManager();
+    		entityManager.getTransaction().begin();
+    		
+    		User newUser = new User();
+    		newUser.setFirstname(prenom);
+    		newUser.setLastname(nom);
+    		newUser.setAddress(address);
+    		newUser.setMail(email);
+    		newUser.setPassword(password);
 
-		entityManager.persist(newUser);
+    		entityManager.persist(newUser);
 
-		entityManager.getTransaction().commit();
-	    entityManager.close();
-	    entityManagerFactory.close();
-		
-	    HttpSession session = request.getSession();
-	    UserManager userManager = new UserManager();
-	    userManager.connection(email, password, session);
+    		entityManager.getTransaction().commit();
+    	    entityManager.close();
+    	    entityManagerFactory.close();
+    		
+    	    HttpSession session = request.getSession();
+    	    userManager.connection(email, password, session);
+        } else {
+        	erreurs.put(MAIL_EARLY_EXIST, "Error");
+        	msgVal = "error user exist";
+        }
 	    
         // Build view
         if(msgVal == null) {
