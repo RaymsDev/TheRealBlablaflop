@@ -63,6 +63,11 @@ body {
 	margin: auto;
 }
 
+#conducteur > form > .mdl-checkbox,
+#conducteur > form > .marged {
+	margin: 20px 30px;
+}
+
 *::-webkit-scrollbar-track
 {
 	background-color: rgba(0,0,0,0.1);
