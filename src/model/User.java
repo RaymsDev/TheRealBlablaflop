@@ -30,8 +30,8 @@ public class User implements Serializable {
 	private String password;
 
 	//bi-directional many-to-one association to Ride
-	@OneToMany(mappedBy="user")
-	private List<Ride> driver;
+	@OneToMany(mappedBy="driver")
+	private List<Ride> ridesAsDriver;
 
 	//bi-directional many-to-many association to Ride
 	@ManyToMany
@@ -44,7 +44,7 @@ public class User implements Serializable {
 			@JoinColumn(name="id_ride")
 			}
 		)
-	private List<Ride> rides;
+	private List<Ride> ridesAsPassenger;
 
 	public User() {
 	}
@@ -97,34 +97,34 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public List<Ride> getDriver() {
-		return this.driver;
+	public List<Ride> getRidesAsDriver() {
+		return this.ridesAsDriver;
 	}
 
-	public void setDriver(List<Ride> driver) {
-		this.driver = driver;
+	public void setRidesAsDriver(List<Ride> ridesAsDriver) {
+		this.ridesAsDriver = ridesAsDriver;
 	}
 
-	public Ride addDriver(Ride driver) {
-		getDriver().add(driver);
-		driver.setUser(this);
+	public Ride addRidesAsDriver(Ride ridesAsDriver) {
+		getRidesAsDriver().add(ridesAsDriver);
+		ridesAsDriver.setDriver(this);
 
-		return driver;
+		return ridesAsDriver;
 	}
 
-	public Ride removeDriver(Ride driver) {
-		getDriver().remove(driver);
-		driver.setUser(null);
+	public Ride removeRidesAsDriver(Ride ridesAsDriver) {
+		getRidesAsDriver().remove(ridesAsDriver);
+		ridesAsDriver.setDriver(null);
 
-		return driver;
+		return ridesAsDriver;
 	}
 
-	public List<Ride> getRides() {
-		return this.rides;
+	public List<Ride> getRidesAsPassenger() {
+		return this.ridesAsPassenger;
 	}
 
-	public void setRides(List<Ride> rides) {
-		this.rides = rides;
+	public void setRidesAsPassenger(List<Ride> ridesAsPassenger) {
+		this.ridesAsPassenger = ridesAsPassenger;
 	}
 
 }

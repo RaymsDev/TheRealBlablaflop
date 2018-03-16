@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 
@@ -22,7 +24,7 @@ public class Ride implements Serializable {
 	private int conversationLevel;
 
 	@Column(name="google_ride")
-	private Object googleRide;
+	private String googleRide;
 
 	private byte isChildsAllowed;
 
@@ -30,18 +32,19 @@ public class Ride implements Serializable {
 
 	private byte isSmokerAllowed;
 
-	//bi-directional many-to-one association to Passenger
-	@OneToMany(mappedBy="ride")
-	private List<Passenger> passengers;
+	@Temporal(TemporalType.DATE)
+	private Date startDate;
+
+	private Time startTime;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="id_driver")
-	private User user;
+	private User driver;
 
 	//bi-directional many-to-many association to User
-	@ManyToMany(mappedBy="rides")
-	private List<User> users;
+	@ManyToMany(mappedBy="ridesAsPassenger")
+	private List<User> passengers;
 
 	public Ride() {
 	}
@@ -62,11 +65,11 @@ public class Ride implements Serializable {
 		this.conversationLevel = conversationLevel;
 	}
 
-	public Object getGoogleRide() {
+	public String getGoogleRide() {
 		return this.googleRide;
 	}
 
-	public void setGoogleRide(Object googleRide) {
+	public void setGoogleRide(String googleRide) {
 		this.googleRide = googleRide;
 	}
 
@@ -94,42 +97,36 @@ public class Ride implements Serializable {
 		this.isSmokerAllowed = isSmokerAllowed;
 	}
 
-	public List<Passenger> getPassengers() {
+	public Date getStartDate() {
+		return this.startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Time getStartTime() {
+		return this.startTime;
+	}
+
+	public void setStartTime(Time startTime) {
+		this.startTime = startTime;
+	}
+
+	public User getDriver() {
+		return this.driver;
+	}
+
+	public void setDriver(User driver) {
+		this.driver = driver;
+	}
+
+	public List<User> getPassengers() {
 		return this.passengers;
 	}
 
-	public void setPassengers(List<Passenger> passengers) {
+	public void setPassengers(List<User> passengers) {
 		this.passengers = passengers;
-	}
-
-	public Passenger addPassenger(Passenger passenger) {
-		getPassengers().add(passenger);
-		passenger.setRide(this);
-
-		return passenger;
-	}
-
-	public Passenger removePassenger(Passenger passenger) {
-		getPassengers().remove(passenger);
-		passenger.setRide(null);
-
-		return passenger;
-	}
-
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public List<User> getUsers() {
-		return this.users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
 	}
 
 }

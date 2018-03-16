@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 15, 2018 at 04:25 PM
+-- Generation Time: Mar 16, 2018 at 03:28 PM
 -- Server version: 5.7.21
 -- PHP Version: 7.2.2
 
@@ -46,11 +46,13 @@ DROP TABLE IF EXISTS `ride`;
 CREATE TABLE `ride` (
   `id` int(11) NOT NULL,
   `id_driver` int(11) NOT NULL,
-  `google_ride` json NOT NULL,
+  `google_ride` longtext NOT NULL,
   `isSmokerAllowed` tinyint(1) NOT NULL DEFAULT '0',
   `isMusicAllowed` tinyint(1) NOT NULL DEFAULT '0',
   `isChildsAllowed` tinyint(1) NOT NULL DEFAULT '0',
-  `conversationLevel` int(11) NOT NULL
+  `conversationLevel` int(11) NOT NULL,
+  `startDate` date NOT NULL,
+  `startTime` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -68,6 +70,13 @@ CREATE TABLE `user` (
   `mail` varchar(100) CHARACTER SET latin1 NOT NULL,
   `password` varchar(100) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `firstname`, `lastname`, `address`, `mail`, `password`) VALUES
+(1, 'plop', 'plop', 'Toulouse', 'plop@mail.com', 'plop');
 
 --
 -- Indexes for dumped tables
@@ -107,7 +116,7 @@ ALTER TABLE `ride`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -117,8 +126,8 @@ ALTER TABLE `user`
 -- Constraints for table `passenger`
 --
 ALTER TABLE `passenger`
-  ADD CONSTRAINT `fk_idRide_from_ride` FOREIGN KEY (`id_ride`) REFERENCES `ride` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_idUser_from_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_idRide_from_ride` FOREIGN KEY (`id_ride`) REFERENCES `ride` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_idUser_from_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `ride`

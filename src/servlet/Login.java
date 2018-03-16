@@ -82,7 +82,9 @@ public class Login extends HttpServlet {
         UserManager userManager = new UserManager();
         HttpSession session = request.getSession();
         
-        if(error.isEmpty() && userManager.connection(email, password, session)){
+        boolean isConnected = userManager.connection(email, password, session);
+        
+        if(error.isEmpty() && isConnected){
         	statusOk=true;
         	statusMessage="Connect&eacute;";
         }
