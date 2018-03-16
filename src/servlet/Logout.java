@@ -12,7 +12,7 @@ import service.UserManager;
 /**
  * Servlet implementation class Logout
  */
-@WebServlet("/Logout")
+@WebServlet("/logout")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String ACCUEIL_PAGE_URL="/index.jsp";
@@ -34,7 +34,7 @@ public class Logout extends HttpServlet {
 		UserManager userManager = new UserManager();
 		userManager.logOut(request.getSession());
 		
-		response.sendRedirect(ACCUEIL_PAGE_URL);
+		response.sendRedirect(request.getContextPath() + ACCUEIL_PAGE_URL);
 	}
 
 }

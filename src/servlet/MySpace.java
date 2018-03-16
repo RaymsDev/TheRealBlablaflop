@@ -44,6 +44,7 @@ public class MySpace extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO check if connected
+		
 		request.setAttribute("errorStatus", false);
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward( request, response );
 	}

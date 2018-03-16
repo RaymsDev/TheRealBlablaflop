@@ -52,8 +52,7 @@ public class UserManager {
 	}
 	
 	public boolean updateUser(HttpSession session, User updatedUser) {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		EntityManager entityManager = baseAccess();
 		boolean result = false;
 		try {
 			User oldUser = null;
