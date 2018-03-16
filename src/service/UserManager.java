@@ -21,12 +21,12 @@ public class UserManager {
 	public boolean exist(String mail) {
 		EntityManager entityManager = baseAccess();
 		
-		Query q = entityManager.createQuery("SELECT count(u.mail) FROM User u WHERE u.mail = :userMail");
-		q.setParameter("userMail", mail);
+		Query q = entityManager.createQuery("SELECT COUNT(u.mail) FROM User u WHERE u.mail = :usermail");
+		q.setParameter("usermail", mail);
 		
-		int nbUserWithMail = q.getFirstResult();
+		long nbUserWithMail = (long) q.getSingleResult();
 		
-		if (nbUserWithMail != 0) {
+		if (nbUserWithMail == 0.0) {
 			return false;
 		} else {
 			return true;

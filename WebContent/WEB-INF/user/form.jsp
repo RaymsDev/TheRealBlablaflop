@@ -40,4 +40,5 @@
 				</a>
 			</div>
 			<p class="info">${actionMessage}</p>
+			<p class="erreur">${errorMessage}</p>
 		</form>

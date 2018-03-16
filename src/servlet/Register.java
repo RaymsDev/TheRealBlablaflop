@@ -26,7 +26,7 @@ public class Register extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-    public static String VIEW_PAGES_URL="/WEB-INF/register.jsp";
+    public static String REGISTER_PAGES_URL="/WEB-INF/register.jsp";
     public static String ACCUEIL_PAGE_URL="/index.jsp";
 
     public static final String FIELD_EMAIL = "email";
@@ -59,7 +59,7 @@ public class Register extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("errorStatus", true);
-		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward( request, response );
+		this.getServletContext().getRequestDispatcher(REGISTER_PAGES_URL).forward( request, response );
 	}
 
 	/**
@@ -75,61 +75,69 @@ public class Register extends HttpServlet {
         String address = request.getParameter(FIELD_ADDRESS);
 
         // Prepare results
+        boolean errorOccured= false;
         Map<String, String> erreurs = new HashMap<String, String>();
         Map<String, String> form = new HashMap<String, String>();
         String actionMessage=null;
-        String msgVal=null;
-
-        msgVal=validateEmail(email);
-        if(msgVal==null){
-        	form.put(FIELD_EMAIL, email);
-        }
-        else{
-            erreurs.put(FIELD_EMAIL, msgVal);
-        }
+        String errorMessage=null;
+        String msgVal=null;        
 
         msgVal=validatePwd(password, pwdConfirmation);
-        if(msgVal==null){
-        	form.put(FIELD_PWD, password);
-        }
-        else{
+        if(msgVal!=null){
+        	errorOccured=true;
             erreurs.put(FIELD_CONFIRM_PWD, msgVal);
         }
         
-        UserManager userManager = new UserManager();
-                
-        if( !userManager.exist(email) ) {
-        	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
-    		EntityManager entityManager = entityManagerFactory.createEntityManager();
-    		entityManager.getTransaction().begin();
-    		
-    		User newUser = new User();
-    		newUser.setFirstname(prenom);
-    		newUser.setLastname(nom);
-    		newUser.setAddress(address);
-    		newUser.setMail(email);
-    		newUser.setPassword(password);
-
-    		entityManager.persist(newUser);
-
-    		entityManager.getTransaction().commit();
-    	    entityManager.close();
-    	    entityManagerFactory.close();
-    		
-    	    HttpSession session = request.getSession();
-    	    userManager.connection(email, password, session);
+        
+        msgVal=validateEmail(email);
+        if(msgVal!=null){
+        	errorOccured=true;
+            erreurs.put(FIELD_EMAIL, msgVal);
         } else {
-        	erreurs.put(MAIL_EARLY_EXIST, "Error");
-        	msgVal = "error user exist";
+        	 UserManager userManager = new UserManager();
+             
+             if( !userManager.exist(email) ) {
+             	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
+         		EntityManager entityManager = entityManagerFactory.createEntityManager();
+         		entityManager.getTransaction().begin();
+         		
+         		User newUser = new User();
+         		newUser.setFirstname(prenom);
+         		newUser.setLastname(nom);
+         		newUser.setAddress(address);
+         		newUser.setMail(email);
+         		newUser.setPassword(password);
+
+         		entityManager.persist(newUser);
+
+         		entityManager.getTransaction().commit();
+         	    entityManager.close();
+         	    entityManagerFactory.close();
+         		
+         	    HttpSession session = request.getSession();
+         	    userManager.connection(email, password, session);
+             } else {
+             	errorOccured=true;
+             	errorMessage = MAIL_EARLY_EXIST;
+             }
         }
 	    
         // Build view
-        if(msgVal == null) {
+        if(!errorOccured) {
         	response.sendRedirect( request.getContextPath() +  ACCUEIL_PAGE_URL);
         }else {
+        	form.put(FIELD_EMAIL, email);
+        	form.put(FIELD_NOM, nom);
+        	form.put(FIELD_PRENOM, prenom);
+        	// Problème encodage fréquent avec le renvoie de l'adresse
+        	form.put(FIELD_ADDRESS, address);
+        	
         	// Prepare model to view
+        	request.setAttribute("errorMessage", errorMessage);
+        	request.setAttribute("actionMessage", actionMessage);
             request.setAttribute("form", form);
-            this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include( request, response);
+            request.setAttribute("erreurs", erreurs);
+            this.getServletContext().getRequestDispatcher(REGISTER_PAGES_URL).include( request, response);
         }
 	}
 

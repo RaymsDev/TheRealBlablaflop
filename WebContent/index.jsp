@@ -5,7 +5,7 @@
 <html>
 <head>
 	<%@ include file="/includes/mdl.jsp" %>
-	<meta http-equiv="Content-Type" content="text/html; UTF-8">
+	<meta http-equiv="Content-Type" content="text/html">
 	<title>Accueil | BlablaFlop</title>
 </head>
 <body>
