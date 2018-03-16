@@ -8,9 +8,9 @@
 	<meta http-equiv="Content-Type" content="text/html; UTF-8">
 	<title>Accueil | BlablaFlop</title>
 </head>
-<body>
+<body style="height: 200%">
    	<c:import url="/WEB-INF/menu/menu.jsp" />
-	<div>
+	<div style="height: 100%; margin-top: 64px;">
 		<div id="map"></div>
 		<div id="positionning">
 			<span>Calcul de la position en cours</span>
@@ -21,17 +21,11 @@
 				<input name="address" class="mdl-textfield__input" type="text" id="autoSearch" value="" spellcheck="false">
 				<label class="mdl-textfield__label" for="autoSearch">Adresse</label>
 			</div>
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-			  Ok
-			</button>
 		</div>
 		<div class="col center" style="margin: 15px">
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-			  étape suivante <i class="material-icons">arrow_downward</i>
+			<button id="next_step" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" disabled>
+			  &Eacute;tape suivante <i class="material-icons">arrow_downward</i>
 			</button>
-		</div>
-		<div class="section">
-			<%@ include file="/includes/views/newRoad.jsp" %>
 		</div>
 	    <script src="script/map.js"></script>
 	    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBH0tjh8m9W5tnOAE1IogA6fTrXXTAzRAc&libraries=places&callback=initMap"></script>
@@ -40,7 +34,19 @@
     			document.getElementById('autoSearch'), 
     			{types: ['geocode']}
    			);
+	    	auto.addListener('place_changed', function() {
+	    		updatePos(auto.getPlace());
+	    	});
+	    	
+	    	$('#next_step').on('click', function () {
+	    	    $('html, body').animate({
+	    	        scrollTop: $('#new_ride').offset().top
+	    	    }, 500);
+	    	});
 	    </script>
+	</div>
+	<div id="new_ride" class="section" style="height: 100%; margin-top: 84px;">
+		<%@ include file="/includes/views/newRoad.jsp" %>
 	</div>
 </body>
 </html>

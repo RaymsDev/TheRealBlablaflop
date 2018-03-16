@@ -20,7 +20,7 @@
       </nav>
     </div>
   </header>
-  <div class="mdl-layout__drawer">
+  <div class="mdl-layout__drawer mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
     <span class="mdl-layout-title">Blablaflop</span>
     <nav class="mdl-navigation">
    	  <a class="mdl-navigation__link" href="<c:url value="/"/>">Accueil</a>
@@ -33,6 +33,4 @@
       <a class="mdl-navigation__link" href="<c:url value="/register"/>">S'enregistrer</a>
     </nav>
   </div>
-</div>
-<div style="width: 1px; height: 50px;">
 </div>
