@@ -21,7 +21,7 @@ public class UserManager {
 	public boolean exist(String mail) {
 		EntityManager entityManager = baseAccess();
 		
-		Query q = entityManager.createQuery("COUNT u FROM User u WHERE u.mail = :userMail");
+		Query q = entityManager.createQuery("SELECT count(u.mail) FROM User u WHERE u.mail = :userMail");
 		q.setParameter("userMail", mail);
 		
 		int nbUserWithMail = q.getFirstResult();
@@ -51,7 +51,7 @@ public class UserManager {
 		}
 	}
 	
-	public boolean updateUser(HttpSession session, User user) {
+	public boolean updateUser(HttpSession session, User updatedUser) {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Blablaflop");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		boolean result = false;
@@ -63,9 +63,9 @@ public class UserManager {
 				User userToUpdate = (User)entityManager.find(oldUser.getClass(), 1);
 
 				entityManager.getTransaction().begin();
-				userToUpdate.setFirstname(user.getFirstname());
-				userToUpdate.setLastname(user.getLastname());
-				userToUpdate.setAddress(user.getAddress());
+				userToUpdate.setFirstname(updatedUser.getFirstname());
+				userToUpdate.setLastname(updatedUser.getLastname());
+				userToUpdate.setAddress(updatedUser.getAddress());
 				entityManager.getTransaction().commit();
 
 				result = true;
