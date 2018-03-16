@@ -16,11 +16,16 @@
 	    <c:if test="${ not empty UserSession }">
 	       <a class="mdl-navigation__link" href="<c:url value="/mySpace"/>">${UserSession.getMail()}</a>
 	    </c:if>
-        <a class="mdl-navigation__link" href="<c:url value="/register"/>">S'enregistrer</a>
+        <c:if test="${ empty UserSession }">
+			<a class="mdl-navigation__link" href="<c:url value="/register"/>">S'enregistrer</a>
+		</c:if>
+		<c:if test="${ not empty UserSession }">
+			<a class="mdl-navigation__link" href="<c:url value="/logout"/>">D&eacute;connexion</a>
+		</c:if>
       </nav>
     </div>
   </header>
-  <div class="mdl-layout__drawer">
+  <div class="mdl-layout__drawer mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
     <span class="mdl-layout-title">Blablaflop</span>
     <nav class="mdl-navigation">
    	  <a class="mdl-navigation__link" href="<c:url value="/"/>">Accueil</a>
@@ -30,9 +35,12 @@
 	  <c:if test="${ not empty UserSession }">
         <a class="mdl-navigation__link" href="<c:url value="/mySpace"/>">${UserSession.getMail()}</a>
       </c:if>
-      <a class="mdl-navigation__link" href="<c:url value="/register"/>">S'enregistrer</a>
+      <c:if test="${ empty UserSession }">
+		<a class="mdl-navigation__link" href="<c:url value="/register"/>">S'enregistrer</a>
+	  </c:if>
+	  <c:if test="${ not empty UserSession }">
+        <a class="mdl-navigation__link" href="<c:url value="/logout"/>">D&eacute;connexion</a>
+      </c:if>
     </nav>
   </div>
-</div>
-<div style="width: 1px; height: 50px;">
 </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 09, 2018 at 10:45 AM
+-- Generation Time: Mar 15, 2018 at 04:25 PM
 -- Server version: 5.7.21
 -- PHP Version: 7.2.2
 
@@ -21,8 +21,37 @@ SET time_zone = "+00:00";
 --
 -- Database: `blablaflop`
 --
-CREATE DATABASE IF NOT EXISTS `blablaflop` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `blablaflop` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `blablaflop`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `passenger`
+--
+
+DROP TABLE IF EXISTS `passenger`;
+CREATE TABLE `passenger` (
+  `id_ride` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ride`
+--
+
+DROP TABLE IF EXISTS `ride`;
+CREATE TABLE `ride` (
+  `id` int(11) NOT NULL,
+  `id_driver` int(11) NOT NULL,
+  `google_ride` json NOT NULL,
+  `isSmokerAllowed` tinyint(1) NOT NULL DEFAULT '0',
+  `isMusicAllowed` tinyint(1) NOT NULL DEFAULT '0',
+  `isChildsAllowed` tinyint(1) NOT NULL DEFAULT '0',
+  `conversationLevel` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -33,23 +62,30 @@ USE `blablaflop`;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `firstname` varchar(50) NOT NULL,
-  `lastname` varchar(50) NOT NULL,
-  `address` varchar(200) NOT NULL,
-  `mail` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id`, `firstname`, `lastname`, `address`, `mail`, `password`) VALUES
-(1, 'plop', 'plop', 'plop', 'plop', 'plop');
+  `firstname` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `lastname` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `address` varchar(200) CHARACTER SET latin1 NOT NULL,
+  `mail` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(100) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `passenger`
+--
+ALTER TABLE `passenger`
+  ADD PRIMARY KEY (`id_ride`,`id_user`),
+  ADD KEY `fk_idUser_from_user` (`id_user`);
+
+--
+-- Indexes for table `ride`
+--
+ALTER TABLE `ride`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_idDriver_from_user` (`id_driver`);
 
 --
 -- Indexes for table `user`
@@ -62,10 +98,33 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `ride`
+--
+ALTER TABLE `ride`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `passenger`
+--
+ALTER TABLE `passenger`
+  ADD CONSTRAINT `fk_idRide_from_ride` FOREIGN KEY (`id_ride`) REFERENCES `ride` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_idUser_from_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `ride`
+--
+ALTER TABLE `ride`
+  ADD CONSTRAINT `fk_idDriver_from_user` FOREIGN KEY (`id_driver`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
