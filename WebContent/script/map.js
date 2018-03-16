@@ -1,6 +1,8 @@
 var destPos = {lat: 43.586938, lng: 1.493185};
 var marker = null;
 var markerDest = null;
+var _pos = null;
+var Gkey = 'AIzaSyBH0tjh8m9W5tnOAE1IogA6fTrXXTAzRAc';
 
 function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), {
@@ -34,9 +36,10 @@ function initMap() {
 		  lat: position.coords.latitude,
 		  lng: position.coords.longitude
 		};
-		
+		_pos = pos;
 		marker.setPosition(pos);
 		$('#next_step').prop('disabled', false);
+		getGoogleRide();
 	    map.setCenter(pos);
 	  }, function() {
 		  if(canceled) return;
@@ -59,5 +62,21 @@ function updatePos(pos) {
 	if(marker && pos.geometry) {
 		marker.setPosition(pos.geometry.location)
 		$('#next_step').prop('disabled', false);
+		getGoogleRide();
 	}
+}
+
+function getGoogleRide() {
+	var url = 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=' +
+		_pos.lat + ',' + _pos.lng + '&destinations=' + destPos.lat + ',' + destPos.lng;
+	
+	$.ajax({
+        url: url, 
+        type: "GET",   
+        dataType: 'json',
+        cache: false,
+        success: function(response){
+        	console.log(response);
+        }           
+    });
 }
