@@ -16,7 +16,12 @@
 	    <c:if test="${ not empty UserSession }">
 	       <a class="mdl-navigation__link" href="<c:url value="/mySpace"/>">${UserSession.getMail()}</a>
 	    </c:if>
-        <a class="mdl-navigation__link" href="<c:url value="/register"/>">S'enregistrer</a>
+        <c:if test="${ empty UserSession }">
+			<a class="mdl-navigation__link" href="<c:url value="/register"/>">S'enregistrer</a>
+		</c:if>
+		<c:if test="${ not empty UserSession }">
+			<a class="mdl-navigation__link" href="<c:url value="/logout"/>">D&eacute;connexion</a>
+		</c:if>
       </nav>
     </div>
   </header>
