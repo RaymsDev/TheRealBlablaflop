@@ -21,10 +21,11 @@ public class UserManager {
 	public boolean exist(String mail) {
 		EntityManager entityManager = baseAccess();
 		
-		Query q = entityManager.createQuery("SELECT COUNT(u.mail) FROM User u WHERE u.mail = :usermail");
+		String jpqa = "SELECT COUNT(u.mail) FROM User u WHERE u.mail = :usermail";
+		Query q = entityManager.createQuery(jpqa);
 		q.setParameter("usermail", mail);
 		
-		long nbUserWithMail = (long) q.getSingleResult();
+		long nbUserWithMail = Long.parseLong(q.getSingleResult().toString());
 		
 		if (nbUserWithMail == 0.0) {
 			return false;
@@ -59,7 +60,7 @@ public class UserManager {
 			oldUser = (User)session.getAttribute(USER_KEY);
 			
 			if(oldUser != null) {
-				User userToUpdate = (User)entityManager.find(oldUser.getClass(), 1);
+				User userToUpdate = (User)entityManager.find(oldUser.getClass(), oldUser);
 
 				entityManager.getTransaction().begin();
 				userToUpdate.setFirstname(updatedUser.getFirstname());
@@ -84,6 +85,15 @@ public class UserManager {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+	
+	public void delete(HttpSession session ) {
+		EntityManager entityManager = baseAccess();
+		User userToDelete = connectedUser(session);
+		
+		entityManager.getTransaction().begin();
+		entityManager.remove(userToDelete);
+		entityManager.getTransaction().commit();
 	}
 	
 	public void logOut(HttpSession session ) {
