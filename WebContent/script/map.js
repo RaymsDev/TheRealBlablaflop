@@ -67,16 +67,25 @@ function updatePos(pos) {
 }
 
 function getGoogleRide() {
-	var url = 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=' +
-		_pos.lat + ',' + _pos.lng + '&destinations=' + destPos.lat + ',' + destPos.lng;
-	
-	$.ajax({
-        url: url, 
-        type: "GET",   
-        dataType: 'json',
-        cache: false,
-        success: function(response){
-        	console.log(response);
-        }           
+	var directionsService = new google.maps.DirectionsService;
+	directionsService.route({
+		origin: _pos,
+		destination: destPos,
+		travelMode: 'DRIVING'
+  	}, function(response, status) {
+	    if (status === 'OK') {
+		  var light = {
+			request: response.request,
+			routes: response.routes.map(r => { return {
+				legs: r.legs.map(l => {
+					return {steps: l.steps.map(s => { return {lat_lngs: s.lat_lngs} })}
+				})
+			} })
+		  }
+		  var jsonRoute = JSON.stringify(light);
+		  $('#json_route').val(jsonRoute);
+		} else {
+			window.alert('Directions request failed due to ' + status);
+		}
     });
 }

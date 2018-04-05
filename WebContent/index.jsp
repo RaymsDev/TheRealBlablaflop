@@ -19,7 +19,7 @@
 		<div class="row center">
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="searchbox">
 				<input name="address" class="mdl-textfield__input" type="text" id="autoSearch" value="" spellcheck="false">
-				<label class="mdl-textfield__label" for="autoSearch">Adresse</label>
+				<label class="mdl-textfield__label" for="autoSearch">Adresse de départ</label>
 			</div>
 		</div>
 		<div class="col center" style="margin: 15px">

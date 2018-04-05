@@ -11,7 +11,7 @@
 	
 	  <div class="mdl-tabs__panel is-active" id="conducteur">
 	  	<form method="post" action="Ride" class="col" style="width: 100%; margin: auto;">
-	  		<input type="hidden" id="googleRes" name="google_ride" value="" />
+	  		<input type="hidden" id="json_route" name="google_ride" value="" />
 	  		<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="isSmokerAllowed">
 			  <input type="checkbox" id="isSmokerAllowed" name="isSmokerAllowed" class="mdl-checkbox__input" checked>
 			  <span class="mdl-checkbox__label">Fumeur</span>
@@ -42,7 +42,11 @@
 				</div>
 			</div>
 			<div class="marged">
-				<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Valider mon trajet" />
+				<button id="val_traj" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Valider mon trajet</button>
+				<div>
+					<p style="color: green">Le trajet est valide.</p>
+					<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Enregistrer le trajet" />
+				</div>
 			</div>
 	  	
 	  	</form>
