@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 16, 2018 at 03:28 PM
+-- Generation Time: Apr 05, 2018 at 02:52 PM
 -- Server version: 5.7.21
 -- PHP Version: 7.2.2
 
@@ -47,13 +47,20 @@ CREATE TABLE `ride` (
   `id` int(11) NOT NULL,
   `id_driver` int(11) NOT NULL,
   `google_ride` longtext NOT NULL,
-  `isSmokerAllowed` tinyint(1) NOT NULL DEFAULT '0',
-  `isMusicAllowed` tinyint(1) NOT NULL DEFAULT '0',
-  `isChildsAllowed` tinyint(1) NOT NULL DEFAULT '0',
+  `isSmokerAllowed` int(1) NOT NULL DEFAULT '0',
+  `isMusicAllowed` int(1) NOT NULL DEFAULT '0',
+  `isChildsAllowed` int(1) NOT NULL DEFAULT '0',
   `conversationLevel` int(11) NOT NULL,
   `startDate` date NOT NULL,
   `startTime` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ride`
+--
+
+INSERT INTO `ride` (`id`, `id_driver`, `google_ride`, `isSmokerAllowed`, `isMusicAllowed`, `isChildsAllowed`, `conversationLevel`, `startDate`, `startTime`) VALUES
+(1, 1, '', 0, 0, 0, 2, '2018-04-05', '01:00:00');
 
 -- --------------------------------------------------------
 
@@ -110,7 +117,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `ride`
 --
 ALTER TABLE `ride`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`

@@ -23,14 +23,15 @@ public class Ride implements Serializable {
 
 	private int conversationLevel;
 
+	@Lob
 	@Column(name="google_ride")
 	private String googleRide;
 
-	private byte isChildsAllowed;
+	private int isChildsAllowed;
 
-	private byte isMusicAllowed;
+	private int isMusicAllowed;
 
-	private byte isSmokerAllowed;
+	private int isSmokerAllowed;
 
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
@@ -73,27 +74,27 @@ public class Ride implements Serializable {
 		this.googleRide = googleRide;
 	}
 
-	public byte getIsChildsAllowed() {
+	public int getIsChildsAllowed() {
 		return this.isChildsAllowed;
 	}
 
-	public void setIsChildsAllowed(byte isChildsAllowed) {
+	public void setIsChildsAllowed(int isChildsAllowed) {
 		this.isChildsAllowed = isChildsAllowed;
 	}
 
-	public byte getIsMusicAllowed() {
+	public int getIsMusicAllowed() {
 		return this.isMusicAllowed;
 	}
 
-	public void setIsMusicAllowed(byte isMusicAllowed) {
+	public void setIsMusicAllowed(int isMusicAllowed) {
 		this.isMusicAllowed = isMusicAllowed;
 	}
 
-	public byte getIsSmokerAllowed() {
+	public int getIsSmokerAllowed() {
 		return this.isSmokerAllowed;
 	}
 
-	public void setIsSmokerAllowed(byte isSmokerAllowed) {
+	public void setIsSmokerAllowed(int isSmokerAllowed) {
 		this.isSmokerAllowed = isSmokerAllowed;
 	}
 
