@@ -35,7 +35,10 @@
 			</div>
 			<div>
 				<input value="Modifier" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
-				<a href="deleteUser" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--red">Supprimer mon compte</a>
 			</div>
 			<p class="info">${actionMessage}</p>
+		</form>
+		
+		<form action="deleteuser" method="post" class="center col" style="width: 100%; margin: auto;">
+		  	<input type="submit" name="deleteuser" value="Supprimer mon compte" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--red">
 		</form>

@@ -30,11 +30,11 @@ public class User implements Serializable {
 	private String password;
 
 	//bi-directional many-to-one association to Ride
-	@OneToMany(mappedBy="driver")
+	@OneToMany(orphanRemoval=true, mappedBy="driver")
 	private List<Ride> ridesAsDriver;
 
 	//bi-directional many-to-many association to Ride
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.REMOVE)
 	@JoinTable(
 		name="passenger"
 		, joinColumns={

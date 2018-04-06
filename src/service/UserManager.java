@@ -89,11 +89,16 @@ public class UserManager {
 	
 	public void delete(HttpSession session ) {
 		EntityManager entityManager = baseAccess();
-		User userToDelete = connectedUser(session);
+		User userToSearch = connectedUser(session);
+		
+		User userDeleted = entityManager.find(userToSearch.getClass(), userToSearch.getId());
 		
 		entityManager.getTransaction().begin();
-		entityManager.remove(userToDelete);
+		entityManager.remove(userDeleted);
 		entityManager.getTransaction().commit();
+		
+				
+		session.invalidate();
 	}
 	
 	public void logOut(HttpSession session ) {
