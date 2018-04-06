@@ -34,19 +34,15 @@
 			<div class="marged row" style="align-items: center">
 				<span style="margin: 8px">Le</span>
 				<div class="mdl-textfield mdl-js-textfield" style="max-width: 150px">
-					<input class="mdl-textfield__input" type="date" id="dateRide" name="dateRide">
+					<input class="mdl-textfield__input" type="date" id="dateRide" name="dateRide" required>
 				</div>
 				<span style="margin: 8px">à</span>
 				<div class="mdl-textfield mdl-js-textfield" style="max-width: 75px">
-					<input class="mdl-textfield__input" type="time" id="timeRide" name="timeRide">
+					<input class="mdl-textfield__input" type="time" id="timeRide" name="timeRide" required>
 				</div>
 			</div>
 			<div class="marged">
-				<button id="val_traj" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Valider mon trajet</button>
-				<div>
-					<p style="color: green">Le trajet est valide.</p>
-					<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Enregistrer le trajet" />
-				</div>
+				<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Enregistrer le trajet" />
 			</div>
 	  	
 	  	</form>

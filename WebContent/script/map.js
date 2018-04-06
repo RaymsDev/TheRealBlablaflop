@@ -60,7 +60,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 function updatePos(pos) {
 	if(marker && pos.geometry) {
-		marker.setPosition(pos.geometry.location)
+		marker.setPosition(pos.geometry.location);
+		_pos = pos.geometry.location;
 		$('#next_step').prop('disabled', false);
 		getGoogleRide();
 	}
@@ -83,6 +84,7 @@ function getGoogleRide() {
 			} })
 		  }
 		  var jsonRoute = JSON.stringify(light);
+		  console.log(jsonRoute)
 		  $('#json_route').val(jsonRoute);
 		} else {
 			window.alert('Directions request failed due to ' + status);
