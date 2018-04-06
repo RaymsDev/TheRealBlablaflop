@@ -3,24 +3,27 @@ var marker = null;
 var markerDest = null;
 var _pos = null;
 var Gkey = 'AIzaSyBH0tjh8m9W5tnOAE1IogA6fTrXXTAzRAc';
+var directionsDisplay = null;
 
 function initMap() {
+	directionsDisplay = new google.maps.DirectionsRenderer;
 	var map = new google.maps.Map(document.getElementById('map'), {
 	  center: {lat: 43.624992299999995, lng: 1.4319450999999999},
 	  zoom: 12
 	});
+	directionsDisplay.setMap(map);
 	
-	marker = new google.maps.Marker({
-		position: {lat: 43.624992299999995, lng: 1.4319450999999999},
-		map: map,
-		title: 'Ma position'
-	});
-	
-	markerDest = new google.maps.Marker({
-		position: destPos,
-		map: map,
-		title: 'Lieu de travail'
-	});
+//	marker = new google.maps.Marker({
+//		position: {lat: 43.624992299999995, lng: 1.4319450999999999},
+//		map: map,
+//		title: 'Ma position'
+//	});
+//	
+//	markerDest = new google.maps.Marker({
+//		position: destPos,
+//		map: map,
+//		title: 'Lieu de travail'
+//	});
 	
 	var canceled = false;
 	$('#autoSearch').on('change', () => {
@@ -37,7 +40,7 @@ function initMap() {
 		  lng: position.coords.longitude
 		};
 		_pos = pos;
-		marker.setPosition(pos);
+//		marker.setPosition(pos);
 		$('#next_step').prop('disabled', false);
 		getGoogleRide();
 	    map.setCenter(pos);
@@ -60,7 +63,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 function updatePos(pos) {
 	if(marker && pos.geometry) {
-		marker.setPosition(pos.geometry.location);
+//		marker.setPosition(pos.geometry.location);
 		_pos = pos.geometry.location;
 		$('#next_step').prop('disabled', false);
 		getGoogleRide();
@@ -83,8 +86,9 @@ function getGoogleRide() {
 				})
 			} })
 		  }
+		  directionsDisplay.setDirections(response);
 		  var jsonRoute = JSON.stringify(light);
-		  console.log(jsonRoute)
+//		  console.log(jsonRoute)
 		  $('#json_route').val(jsonRoute);
 		} else {
 			window.alert('Directions request failed due to ' + status);
